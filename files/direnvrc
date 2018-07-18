@@ -19,7 +19,7 @@ layout_virtualenv() {
     echo $pvenv
     if [ -n "$(which pyenv virtualenv)" ]; then
         echo "asdas"
-        pyenv virtualenv --force --quiet ${pyversion} ${pvenv}-${pyversion}
+        pyenv virtualenv --force --quiet ${pyversion} ${pvenv} #-${pyversion}
     fi
 }
 layout_activate() {

@@ -1,2 +1,46 @@
 ---
 # tasks file for asravankumar.python_virtual_envs
+
+- name: Download PyEnv Installer
+  uri:
+    url: https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer
+    dest: /home/ubuntu/
+
+- name: Install PyEnv
+  command: bash /home/ubuntu/pyenv-installer
+
+- name: Install PyEnv-virtualenv plugin
+  git:
+    repo: https://github.com/pyenv/pyenv-virtualenv.git
+    dest: /home/ubuntu/.pyenv/plugins/pyenvb-virtualenv
+
+- name: Install Direnv
+  apt: name={{ item }} state=installed
+  become: True
+  with_items:
+    - direnv
+
+- name: Activate Pyenv
+  lineinfile:
+    path: /home/ubuntu/.bash_profile
+    line: 'eval "$(pyenv init -)"'
+
+- name: Activate Pyenv VirtualEnv
+  lineinfile:
+    path: /home/ubuntu/.bash_profile
+    line: 'eval "$(pyenv virtualenv-init -)"'
+
+- name: Activate direnv
+  lineinfile:
+    path: /home/ubuntu/.bashrc
+    line: 'eval "$(direnv hook bash)"'
+
+- name: Create direnv config directory
+  file: path=/home/ubuntu/.config/direnv state=directory
+
+- name: Copy Direnv config
+  copy:
+    src=direnvrc
+    dest=/home/ubuntu/.config/direnv/
+
+

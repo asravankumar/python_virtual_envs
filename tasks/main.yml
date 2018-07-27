@@ -11,7 +11,7 @@
 
 - name: Activate Pyenv VirtualEnv
   lineinfile:
-    path: /home/ubuntu/.bash_profile
+    path: /home/ubuntu/.bashrc
     line: 'eval "$(pyenv virtualenv-init -)"'
 
 - name: Activate direnv

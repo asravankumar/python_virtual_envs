@@ -15,10 +15,7 @@ use_python() {
 layout_virtualenv() {
     local pyversion=$1
     local pvenv=$2
-    echo $pyversion
-    echo $pvenv
     if [ -n "$(which pyenv virtualenv)" ]; then
-        echo "asdas"
         pyenv virtualenv --force --quiet ${pyversion} ${pvenv} #-${pyversion}
     fi
 }
@@ -27,9 +24,6 @@ layout_activate() {
         local pyenvprefix=$(pyenv prefix)
         local pyversion=$(pyenv version-name)
         local pvenv="$1"
-        echo "----"
-        echo $pvenv
-        echo "----"
         source ${pyenvprefix}/envs/${pvenv}/bin/activate
     fi
 }
